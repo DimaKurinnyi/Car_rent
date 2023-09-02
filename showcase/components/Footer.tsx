@@ -1,4 +1,4 @@
-import { footerLinks } from '@/constans';
+import { footerLinks } from '@/constants';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -23,11 +23,14 @@ const Footer = () => {
           {footerLinks.map((link) => (
             <div className="footer__link">
               <h3 className="font-bolt">{link.title}</h3>
-              {link.links.map((item)=>(<Link key={item.title} href={item.url} className='text-gray-500'>{item.title}</Link>))}
+              {link.links.map((item) => (
+                <Link key={item.title} href={item.url} className="text-gray-500">
+                  {item.title}
+                </Link>
+              ))}
             </div>
           ))}
         </div>
-         
       </div>
     </footer>
   );

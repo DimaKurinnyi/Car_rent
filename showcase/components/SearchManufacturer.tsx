@@ -4,7 +4,7 @@ import { Combobox, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import { Fragment, useState } from 'react';
 
-import { manufacturers } from '@/constans';
+import { manufacturers } from '@/constants';
 import { SearchManufacturerProps } from '@/types';
 
 const SearchManufacturer = ({ manufacturer, setManufacturer }: SearchManufacturerProps) => {
@@ -17,7 +17,7 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: SearchManufacture
         );
 
   return (
-    <div className="search-manufacturer" >
+    <div className="search-manufacturer">
       <Combobox value={manufacturer} onChange={setManufacturer}>
         <div className="relative w-full">
           <Combobox.Button className="absolute top-[14px]">

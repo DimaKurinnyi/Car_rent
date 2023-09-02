@@ -1,6 +1,6 @@
 'use client';
 import { CarProps } from '@/types';
-import { generateCarImageUrl } from '@/untils';
+import { generateCarImageUrl } from '@/utils';
 import { Dialog, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import { Fragment } from 'react';

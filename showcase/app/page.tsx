@@ -1,18 +1,21 @@
 //import Image from 'next/image'
 
-import { CarCard, CustomFilters, Hero, SearchBar } from '@/components';
-import { fetchCars } from '@/untils';
+import { CarCard, CustomFilters, Hero, SearchBar, ShowMore } from '@/components';
 
-export default async function Home({searchParams}) {
+import { fuels, yearsOfProduction } from '@/constants';
+import { HomeProps } from '@/types';
+import { fetchCars } from '@/utils';
+
+export default async function Home({ searchParams }: HomeProps) {
   const allCars = await fetchCars({
     manufacturer: searchParams.manufacturer || '',
-    year: searchParams.year || '2022',
-    fuel: searchParams.fuel ||'',
+    year: searchParams.year || 2022,
+    fuel: searchParams.fuel || '',
     limit: searchParams.limit || 10,
     model: searchParams.model || '',
   });
 
-  const isDataEmpty = !Array.isArray(allCars) || allCars.length < 0 || !allCars;
+  const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
   return (
     <main className="overflow-hidden">
       <Hero />
@@ -25,8 +28,8 @@ export default async function Home({searchParams}) {
           <SearchBar />
 
           <div className="home__filter-container">
-            <CustomFilters tittle="fuel" />
-            <CustomFilters tittle="year" />
+            <CustomFilters title="fuel" options={fuels} />
+            <CustomFilters title="year" options={yearsOfProduction} />
           </div>
         </div>
         {!isDataEmpty ? (
@@ -36,6 +39,10 @@ export default async function Home({searchParams}) {
                 <CarCard car={car} />
               ))}
             </div>
+            <ShowMore
+              pageNumber={(searchParams.limit || 10) / 10}
+              isNext={(searchParams.limit || 10) > allCars.length}
+            />
           </section>
         ) : (
           <div className=" home__error-container">
